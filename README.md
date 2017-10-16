@@ -1,6 +1,7 @@
 # cs151-tracking
 
 ## Project 4: Ghostbusters
+Version 1.003. Last Updated: 10/16/2017.
 
 <div class="project">
 
@@ -9,6 +10,27 @@
 > <center>I can hear you, ghost.
 > Running won't save you from my
 > Particle filter!</center>
+
+* * *
+
+### Table of Contents
+
+*   [Introduction](#Introduction)
+*   [Welcome](#Welcome)
+*   [Q1: Observation Probability](#Q1)
+*   [Q2: Exact Inference with Observation](#Q2)
+*   [Q3: Exact Inference with Time Elapse](#Q3)
+*   [Q4: Exact Inference Full Test](#Q4)
+*   [Q5: Approximate Inference: Observe](#Q5)
+*   [Q6: Approximate Inference: Time Elapse](#Q6)
+*   [Q7: Joint Particle Filter Initialization](#Q7)
+*   [Q8: Joint Particle Filter Observation](#Q8)
+*   [Q9: Joint Particle Filter Time Elapse and Full Test](#Q9)
+*   [Glossary](#Glossary)
+*   [Submission](#Submission)
+
+* * *
+
 
 ### <a name="Introduction"></a>Introduction
 
@@ -390,4 +412,18 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q10 --no-graphics</pre>
 
+### <a name="Glossary"></a>Object Glossary
 
+***Coming soon!***
+
+### <a name="Submission"></a>Submission
+
+Prior to submitting, be sure you run the autograder on your own machine. Running the autograder locally will help you to debug and expediate your development process. The autograder can be invoked on your own machine using the command:
+
+<pre>python autograder.py</pre>
+
+To run the autograder on a single question, such as question 3, invoke it by
+
+<pre>python autograder.py -q q3</pre>
+
+Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will **submit `bustersAgents.py` and `inference.py`** to the Project 4 assignment. You and your partner may submit as a group.
