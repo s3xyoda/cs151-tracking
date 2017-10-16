@@ -1,6 +1,6 @@
 # cs151-tracking
 
-## Project 5: Ghostbusters
+## Project 4: Ghostbusters
 
 <div class="project">
 
@@ -214,7 +214,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="text-rendering: optimizeLegibility; font-size: 16px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; line-height: 1.4em; vertical-align: baseline;">python autograder.py -q q2 --no-graphics</pre>
 
-***IMPORTANT***: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if the autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
+***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the Gradescope autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if your local autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
 
 ### QUESTION 3 (3 POINTS): Exact Inference with Time Elapse
 
@@ -242,8 +242,6 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="text-rendering: optimizeLegibility; font-size: 16px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; line-height: 1.4em; vertical-align: baseline;">python autograder.py -q q3 --no-graphics</pre>
 
-***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if the autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
-
 As you watch the autograder output, remember that lighter squares indicate that pacman believes a ghost is more likely to occupy that location, and darker squares indicate a ghost is less likely to occupy that location. For which of the test cases do you notice differences emerging in the shading of the squares? Can you explain why some squares get lighter and some squares get darker?
 
 ### QUESTION 4 (2 POINTS): Exact Inference Full Test
@@ -268,9 +266,128 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q4 --no-graphics</pre>
 
-***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the Gradescope autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if your local autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
-
 <span style="font-size: 1em; line-height: 1.6em;"> </span>
 
+
+### QUESTION 5 (2 POINTS): Approximate Inference Initialization and Beliefs
+
+Approximate inference is very trendy among ghost hunters this season. For the next few questions, you will implement a particle filtering algorithm for tracking a single ghost.
+
+First, implement the functions `initializeUniformly` and `getBeliefDistribution` in the `ParticleFilter` class in `inference.py`. <span style="line-height: 1.6;">A particle (sample) is a ghost position in this inference problem. Note that, for initialization, p</span>articles should be evenly (not randomly) distributed across legal positions in order to ensure a uniform prior.
+
+**Note that the variable you store your particles in must be a list.** A list is simply a collection of unweighted variables (positions in this case). Storing your particles as any other data type, such as a dictionary, is incorrect and will produce errors. The `getBeliefDistribution` method then takes the list of particles and converts it into a `DiscreteDistribution` object.
+
+To test your code and run the autograder for this question:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q5</pre>
+
+### QUESTION 6 (3 POINTS): Approximate Inference Observe
+
+Next, we will implement the `observeUpdate` method in the `ParticleFilter` class in `inference.py`. This method constructs a weight distribution over `self.particles` where the weight of a particle is the probability of the observation given Pacman's position and that particle location. Then, we resample from this weighted distribution to construct our new list of particles.
+
+<span style="line-height: 25.6px;">You should again use the function </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getObservationProb</span><span style="line-height: 25.6px;"> to find the probability of an observation given Pacman's position, a potential ghost position, and the jail position. T</span><span style="line-height: 1.6;">he `sample` method of the `DiscreteDistribution` class will also be useful. As a reminder, y</span><span style="line-height: 25.6px;">ou can obtain Pacman's position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">gameState.getPacmanPosition()</span><span style="font-size: 1em; line-height: 25.6px;">, and the jail position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getJailPosition()</span><span style="font-size: 1em; line-height: 25.6px;">.</span>
+
+<span style="line-height: 1.6;">**There is one special case that a correct implementation must handle.** When all particles receive zero weight, the list of particles should be reinitialized by calling `initializeUniformly`. The `total` method of the `DiscreteDistribution` may be useful.</span>
+
+To run the autograder for this question and visualize the output:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q6</pre>
+
+If you want to run this test (or any of the other tests) without graphics you can add the following flag:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q6 --no-graphics</pre>
+
+### QUESTION 7 (3 POINTS): Approximate Inference with Time Elapse
+
+Implement the `elapseTime` function in the `ParticleFilter` class in `inference.py`. This function should construct a new list of particles that corresponds to each existing particle in `self.particles` advancing a time step, and then assign this new list back to `self.particles`. When complete, you should be able to track ghosts nearly as effectively as with exact inference.
+
+Note that in this question, we will test both the `elapseTime` function in isolation, as well as the full implementation of the particle filter combining `elapseTime` and `observe`.
+
+As in the `elapseTime` method of the `ExactInference` class, you should use:
+
+<pre style="font-size: 16px; line-height: 25.6px;">newPosDist = self.getPositionDistribution(gameState, oldPos)</pre>
+
+This line of code obtains the distribution over new positions for the ghost, given its previous position (`oldPos`). <span style="line-height: 25.6px; text-rendering: optimizeLegibility; margin: 0px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; vertical-align: baseline;">T</span><span style="line-height: 1.6; text-rendering: optimizeLegibility; margin: 0px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; vertical-align: baseline;">he `sample` method of the </span>`DiscreteDistribution`<span style="line-height: 25.6px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> class will also be useful.</span>
+
+To run the autograder for this question and visualize the output:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q7</pre>
+
+If you want to run this test (or any of the other tests) without graphics you can add the following flag:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q7 --no-graphics</pre>
+
+
+### QUESTION 8 (1 POINT): Joint Particle Filter Initialization
+
+So far, we have tracked each ghost independently, which works fine for the default `RandomGhost` or more advanced `DirectionalGhost`. However, the prized `DispersingGhost` chooses actions that avoid other ghosts. Since the ghosts' transition models are no longer independent, all ghosts must be tracked jointly in a dynamic Bayes net!
+
+The Bayes net has the following structure, where the hidden variables G represent ghost positions and the emission variables E are the noisy distances to each ghost. This structure can be extended to more ghosts, but only two (a and b) are shown below.
+
+![](https://github.com/HEATlab/cs151-tracking/blob/master/dbn.png)
+
+You will now implement a particle filter that tracks multiple ghosts simultaneously. Each particle will represent a tuple of ghost positions that is a sample of where all the ghosts are at the present time. The code is already set up to extract marginal distributions about each ghost from the joint inference algorithm you will create, so that belief clouds about individual ghosts can be displayed.
+
+Complete the `initializeUniformly` method in `JointParticleFilter` in `inference.py`. Your initialization should be consistent with a uniform prior. You may find the Python `itertools` package helpful. Specifically, look at `itertools.product` to get an implementation of the Cartesian product. However, note that, if you use this, the permutations are not returned in a random order. Therefore, you must then shuffle the list of permutations in order to ensure even placement of particles across the board.
+
+As before, use `self.legalPositions` to obtain a list of positions a ghost may occupy. Also as before, **the variable you store your particles in must be a list**.
+
+To run the autograder for this question and visualize the output:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q8</pre>
+
+If you want to run this test (or any of the other tests) without graphics you can add the following flag:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q8 --no-graphics</pre>
+
+### QUESTION 9 (3 POINTS): Joint Particle Filter Observation
+
+In this question, you will complete the `observeUpdate` method in the `JointParticleFilter` class of `inference.py`. A correct implementation will weight and resample the entire list of particles based on the observation of all ghost distances.
+
+To loop over all the ghosts, use:
+
+<pre style="font-size: 16px; line-height: 25.6px;">for i in range(self.numGhosts):
+    ...</pre>
+
+<span style="line-height: 25.6px;">You can still obtain Pacman's position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">gameState.getPacmanPosition()</span><span style="font-size: 1em; line-height: 25.6px;">, but to get the jail position for a ghost, use </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getJailPosition(i)</span>, since now there are multiple ghosts each with their own jail positions.
+
+**Your implementation should also again handle the special case when all particles receive zero weight.** In this case, `self.particles` should be recreated from the prior distribution by calling `initializeUniformly`.
+
+As in the `update` method for the `ParticleFilter` class, y<span style="line-height: 25.6px;">ou should again use the function </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getObservationProb</span><span style="line-height: 25.6px;"> to find the probability of an observation given Pacman's position, a potential ghost position, and the jail position. T</span><span style="line-height: 1.6;">he `sample` method of the `DiscreteDistribution` class will also be useful.</span>
+
+To run the autograder for this question and visualize the output:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q9</pre>
+
+If you want to run this test (or any of the other tests) without graphics you can add the following flag:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q9 --no-graphics</pre>
+
+### QUESTION 10 (3 POINTS): Joint Particle Filter Time Elapse and Full Test
+
+Complete the `elapseTime` method in `JointParticleFilter` in `inference.py` to resample each particle correctly for the Bayes net. In particular, each ghost should draw a new position conditioned on the positions of all the ghosts at the previous time step.
+
+As in the last question, you can loop over the ghosts using:
+
+<pre style="font-size: 16px; line-height: 25.6px;">for i in range(self.numGhosts):
+    ...</pre>
+
+Then, assuming that "`i`" refers to the index of the ghost, to obtain the distributions over new positions for that single ghost, given the list (`prevGhostPositions`) of previous positions of all of the ghosts, use:
+
+<pre style="font-size: 16px; line-height: 25.6px;">newPosDist = self.getPositionDistribution(gameState, prevGhostPositions, i, self.ghostAgents[i])</pre>
+
+Note that completing this question involves grading both question 9 and question 10\. Since these questions involve joint distributions, they require more computational power (and time) to grade, so please be patient!
+
+As you run the autograder note that `q10/1-JointParticlePredict` and `q10/2-JointParticlePredict` test your `predict` implementations only, and `q10/3-JointParticleFull` tests both your `predict` and `update` implementations. Notice the difference between test 1 and test 3\. In both tests, pacman knows that the ghosts will move to the sides of the gameboard. What is different between the tests, and why?
+
+<center style="line-height: 25.6px;">![](https://s3-us-west-2.amazonaws.com/cs188websitecontent/projects/fa14/tracking/disperse.png)</center>
+
+To run the autograder for this question and visualize the output:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q10</pre>
+
+If you want to run this test (or any of the other tests) without graphics you can add the following flag:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q10 --no-graphics</pre>
 
 
