@@ -268,7 +268,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q4 --no-graphics</pre>
 
-***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the Gradescope autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if the autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
+***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the Gradescope autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if your local autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
 
 <span style="font-size: 1em; line-height: 1.6em;"> </span>
 
