@@ -427,4 +427,4 @@ To run the autograder on a single question, such as question 3, invoke it by
 
 <pre>python autograder.py -q q3</pre>
 
-Note that running the autograder locally will **not** register your grades with us. To submit your P3 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32053/) There you will **submit `bustersAgents.py` and `inference.py`** to the Project 4 assignment. You and your partner may submit as a group.
+Note that running the autograder locally will **not** register your grades with us. To submit your P4 code, please visit our class's [Gradescope submission site.](https://gradescope.com/courses/8921/assignments/32055/) There you will **submit `bustersAgents.py` and `inference.py`** to the Project 4 assignment. You and your partner may submit as a group.
