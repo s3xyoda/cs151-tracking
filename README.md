@@ -17,6 +17,7 @@ Version 1.003. Last Updated: 10/16/2017.
 
 *   [Introduction](#Introduction)
 *   [Welcome](#Welcome)
+*   [Q0: Getting started: DiscreteDistribution Class](#Q0)
 *   [Q1: Observation Probability](#Q1)
 *   [Q2: Exact Inference with Observation](#Q2)
 *   [Q3: Exact Inference with Time Elapse](#Q3)
@@ -190,7 +191,7 @@ In general, all test cases can be found inside test_cases/q*.
 
 </div>
 
-### QUESTION 0 (0 POINTS): `DiscreteDistribution` Class
+### <a name="Q0"></a> QUESTION 0 (0 POINTS): `DiscreteDistribution` Class
 
 Throughout this project, we will be using the `DiscreteDistribution` class defined in `inference.py` to model belief distributions and weight distributions. This class is an extension of the built-in Python dictionary class, where the keys are the different discrete elements of our distribution, and the corresponding values are proportional to the belief or weight that the distribution assigns that element. This question asks you to fill in the missing parts of this class, which will be crucial for later questions (even though this question itself is worth no points).
 
@@ -204,7 +205,7 @@ There are no autograder tests for this question, but the correctness of your imp
 
 Note that, depending on the implementation details of the `sample` method, some correct implementations may not pass the doctests that are provided. To thoroughly check the correctness of your `sample` method, you should instead draw many samples and see if the frequency of each key converges to be proportional of its corresponding value.
 
-### QUESTION 1 (2 POINTS): Observation Probability
+### <a name="Q1"></a> QUESTION 1 (2 POINTS): Observation Probability
 
 In this question, you will implement the `getObservationProb` method in the `InferenceModule` base class in `inference.py`. This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
 
@@ -218,7 +219,7 @@ To test your code and run the autograder for this question:
 
 As a general note, it is possible for some of the autograder tests to take a long time to run for this project, and you will have to exercise patience. As long as the autograder doesn't time out, you should be fine (provided that you actually pass the tests).
 
-### QUESTION 2 (3 POINTS): Exact Inference Observation
+### <a name="Q2"></a> QUESTION 2 (3 POINTS): Exact Inference Observation
 
 In this question, you will implement the `observeUpdate` method in `ExactInference` class of `inference.py` to correctly update the agent's belief distribution over ghost positions given an observation from Pacman's sensors. <span style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 22.4px;">You are implementing the online belief update for observing new evidence.</span> The observe method should,<span style="line-height: 25.6px;"> for this problem, update the belief at every position on the map after receiving a sensor reading. You should iterate your updates over the variable self.allPositions which includes all legal positions plus the special jail position. Beliefs represent the probability that the ghost is at a particular location, and are stored as a </span><span style="font-family: monospace, serif; line-height: 22.4px;">DiscreteDistribution</span><span style="line-height: 25.6px; font-size: 1em;"> object in a field called </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.beliefs</span><span style="line-height: 25.6px; font-size: 1em;">, which you should update.</span>
 
@@ -238,7 +239,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 ***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the Gradescope autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if your local autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
 
-### QUESTION 3 (3 POINTS): Exact Inference with Time Elapse
+### <a name="Q3"></a> QUESTION 3 (3 POINTS): Exact Inference with Time Elapse
 
 In the previous question you implemented belief updates for Pacman based on his observations. Fortunately, Pacman's observations are not his only source of knowledge about where a ghost may be. Pacman also has knowledge about the ways that a ghost may move; namely that the ghost can not move through a wall or more than one space in one time step.
 
@@ -266,7 +267,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 As you watch the autograder output, remember that lighter squares indicate that pacman believes a ghost is more likely to occupy that location, and darker squares indicate a ghost is less likely to occupy that location. For which of the test cases do you notice differences emerging in the shading of the squares? Can you explain why some squares get lighter and some squares get darker?
 
-### QUESTION 4 (2 POINTS): Exact Inference Full Test
+### <a name="Q4"></a> QUESTION 4 (2 POINTS): Exact Inference Full Test
 
 Now that Pacman knows how to use both his prior knowledge and his observations when figuring out where a ghost is, he is ready to hunt down ghosts on his own. This question will use your `observeUpdate` and `elapseTime` implementations together, along with a simple greedy hunting strategy which you will implement for this question. In the simple greedy strategy, Pacman assumes that each ghost is in its most likely position according to his beliefs, then moves toward the closest ghost. Up to this point, Pacman has moved by randomly selecting a valid action.
 
@@ -291,7 +292,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 <span style="font-size: 1em; line-height: 1.6em;"> </span>
 
 
-### QUESTION 5 (2 POINTS): Approximate Inference Initialization and Beliefs
+### <a name="Q5"></a> QUESTION 5 (2 POINTS): Approximate Inference Initialization and Beliefs
 
 Approximate inference is very trendy among ghost hunters this season. For the next few questions, you will implement a particle filtering algorithm for tracking a single ghost.
 
@@ -303,7 +304,7 @@ To test your code and run the autograder for this question:
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q5</pre>
 
-### QUESTION 6 (3 POINTS): Approximate Inference Observe
+### <a name="Q6"></a> QUESTION 6 (3 POINTS): Approximate Inference Observe
 
 Next, we will implement the `observeUpdate` method in the `ParticleFilter` class in `inference.py`. This method constructs a weight distribution over `self.particles` where the weight of a particle is the probability of the observation given Pacman's position and that particle location. Then, we resample from this weighted distribution to construct our new list of particles.
 
@@ -319,7 +320,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q6 --no-graphics</pre>
 
-### QUESTION 7 (3 POINTS): Approximate Inference with Time Elapse
+### <a name="Q7"></a> QUESTION 7 (3 POINTS): Approximate Inference with Time Elapse
 
 Implement the `elapseTime` function in the `ParticleFilter` class in `inference.py`. This function should construct a new list of particles that corresponds to each existing particle in `self.particles` advancing a time step, and then assign this new list back to `self.particles`. When complete, you should be able to track ghosts nearly as effectively as with exact inference.
 
@@ -340,7 +341,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q7 --no-graphics</pre>
 
 
-### QUESTION 8 (1 POINT): Joint Particle Filter Initialization
+### <a name="Q8"></a> QUESTION 8 (1 POINT): Joint Particle Filter Initialization
 
 So far, we have tracked each ghost independently, which works fine for the default `RandomGhost` or more advanced `DirectionalGhost`. However, the prized `DispersingGhost` chooses actions that avoid other ghosts. Since the ghosts' transition models are no longer independent, all ghosts must be tracked jointly in a dynamic Bayes net!
 
@@ -362,7 +363,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q8 --no-graphics</pre>
 
-### QUESTION 9 (3 POINTS): Joint Particle Filter Observation
+### <a name="Q9"></a> QUESTION 9 (3 POINTS): Joint Particle Filter Observation
 
 In this question, you will complete the `observeUpdate` method in the `JointParticleFilter` class of `inference.py`. A correct implementation will weight and resample the entire list of particles based on the observation of all ghost distances.
 
@@ -385,7 +386,7 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 <pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q9 --no-graphics</pre>
 
-### QUESTION 10 (3 POINTS): Joint Particle Filter Time Elapse and Full Test
+### <a name="Q10"></a> QUESTION 10 (3 POINTS): Joint Particle Filter Time Elapse and Full Test
 
 Complete the `elapseTime` method in `JointParticleFilter` in `inference.py` to resample each particle correctly for the Bayes net. In particular, each ghost should draw a new position conditioned on the positions of all the ghosts at the previous time step.
 
