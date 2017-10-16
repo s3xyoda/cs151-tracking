@@ -246,4 +246,30 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 As you watch the autograder output, remember that lighter squares indicate that pacman believes a ghost is more likely to occupy that location, and darker squares indicate a ghost is less likely to occupy that location. For which of the test cases do you notice differences emerging in the shading of the squares? Can you explain why some squares get lighter and some squares get darker?
 
-QUESTION 4 (2 POINTS): EXACT INFERENCE FULL TEST Now that Pacman knows how to use both his prior knowledge and his observations when figuring out where a ghost is, he is ready to hunt down ghosts on his own. This question will use your observeUpdate and elapseTime implementations together, along with a simple greedy hunting strategy which you will implement for this question. In the simple greedy strategy, Pacman assumes that each ghost is in its most likely position according to his beliefs, then moves toward the closest ghost. Up to this point, Pacman has moved by randomly selecting a valid action. Implement the chooseAction method in GreedyBustersAgent in bustersAgents.py. Your agent should first find the most likely position of each remaining uncaptured ghost, then choose an action that minimizes the maze distance to the closest ghost. To find the maze distance between any two positions pos1 and pos2, use self.distancer.getDistance(pos1, pos2). To find the successor position of a position after an action: successorPosition = Actions.getSuccessor(position, action) You are provided with livingGhostPositionDistributions, a list of DiscreteDistribution objects representing the position belief distributions for each of the ghosts that are still uncaptured. If correctly implemented, your agent should win the game in q3/3-gameScoreTest with a score greater than 700 at least 8 out of 10 times. Note: the autograder will also check the correctness of your inference directly, but the outcome of games is a reasonable sanity check. To run the autograder for this question and visualize the output: python autograder.py -q q4 If you want to run this test (or any of the other tests) without graphics you can add the following flag: python autograder.py -q q4 --no-graphics *IMPORTANT*: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the --no-graphics flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.
+### QUESTION 4 (2 POINTS): Exact Inference Full Test
+
+Now that Pacman knows how to use both his prior knowledge and his observations when figuring out where a ghost is, he is ready to hunt down ghosts on his own. This question will use your `observeUpdate` and `elapseTime` implementations together, along with a simple greedy hunting strategy which you will implement for this question. In the simple greedy strategy, Pacman assumes that each ghost is in its most likely position according to his beliefs, then moves toward the closest ghost. Up to this point, Pacman has moved by randomly selecting a valid action.
+
+Implement the `chooseAction` method in `GreedyBustersAgent` in `bustersAgents.py`. Your agent should first find the most likely position of each remaining uncaptured ghost, then choose an action that minimizes the maze distance to the closest ghost.
+
+To find the maze distance between any two positions <span style="font-family: monospace, serif; line-height: 25.6px;">pos1</span><span style="font-size: 1em; line-height: 1.6em;"> and </span><span style="font-family: monospace, serif; line-height: 25.6px;">pos2</span><span style="font-size: 1em; line-height: 1.6em;">, use </span>`self.distancer.getDistance(pos1, pos2)`<span style="font-size: 1em; line-height: 1.6em;">. To find the successor position of a position after an action:</span>
+
+<pre style="font-size: 16px; line-height: 25.6px;">successorPosition = Actions.getSuccessor(position, action)</pre>
+
+You are provided with `livingGhostPositionDistributions`, a list of `DiscreteDistribution` objects representing the position belief distributions for each of the ghosts that are still uncaptured.
+
+If correctly implemented, your agent should win the game in `q3/3-gameScoreTest` with a score greater than 700 at least 8 out of 10 times. _Note:_ the autograder will also check the correctness of your inference directly, but the outcome of games is a reasonable sanity check.
+
+To run the autograder for this question and visualize the output:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q4</pre>
+
+If you want to run this test (or any of the other tests) without graphics you can add the following flag:
+
+<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q4 --no-graphics</pre>
+
+***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if the autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
+
+<span style="font-size: 1em; line-height: 1.6em;"> </span>
+
+
