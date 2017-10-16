@@ -380,7 +380,7 @@ Note that completing this question involves grading both question 9 and questio
 
 As you run the autograder note that `q10/1-JointParticlePredict` and `q10/2-JointParticlePredict` test your `predict` implementations only, and `q10/3-JointParticleFull` tests both your `predict` and `update` implementations. Notice the difference between test 1 and test 3\. In both tests, pacman knows that the ghosts will move to the sides of the gameboard. What is different between the tests, and why?
 
-<center style="line-height: 25.6px;">![](https://s3-us-west-2.amazonaws.com/cs188websitecontent/projects/fa14/tracking/disperse.png)</center>
+![](https://github.com/HEATlab/cs151-tracking/blob/master/disperse.png)
 
 To run the autograder for this question and visualize the output:
 
