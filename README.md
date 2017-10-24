@@ -349,17 +349,17 @@ The Bayes net has the following structure, where the hidden variables G represen
 
 You will now implement a particle filter that tracks multiple ghosts simultaneously. Each particle will represent a tuple of ghost positions that is a sample of where all the ghosts are at the present time. The code is already set up to extract marginal distributions about each ghost from the joint inference algorithm you will create, so that belief clouds about individual ghosts can be displayed.
 
-Complete the `initializeUniformly` method in `JointParticleFilter` in `inference.py`. Your initialization should be consistent with a uniform prior. You may find the Python `itertools` package helpful. Specifically, look at `itertools.product` to get an implementation of the Cartesian product. However, note that, if you use this, the permutations are not returned in a random order. Therefore, you must then shuffle the list of permutations in order to ensure even placement of particles across the board.
+**Complete the `initializeUniformly` method in `JointParticleFilter` in `inference.py`.** Your initialization should be consistent with a uniform prior. You may find the Python `itertools` package helpful. Specifically, look at `itertools.product` to get an implementation of the Cartesian product. However, note that, if you use this, the permutations are not returned in a random order. Therefore, you must then shuffle the list of permutations in order to ensure even placement of particles across the board.
 
 As before, use `self.legalPositions` to obtain a list of positions a ghost may occupy. Also as before, **the variable you store your particles in must be a list**.
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q8</pre>
+``python autograder.py -q q8``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q8 --no-graphics</pre>
+``python autograder.py -q q8 --no-graphics``
 
 ### <a name="Q9"></a> QUESTION 9 (3 POINTS): Joint Particle Filter Observation
 
@@ -367,35 +367,35 @@ In this question, you will complete the `observeUpdate` method in the `Joint
 
 To loop over all the ghosts, use:
 
-<pre style="font-size: 16px; line-height: 25.6px;">for i in range(self.numGhosts):
-    ...</pre>
+``for i in range(self.numGhosts):
+    ...``
 
-<span style="line-height: 25.6px;">You can still obtain Pacman's position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">gameState.getPacmanPosition()</span><span style="font-size: 1em; line-height: 25.6px;">, but to get the jail position for a ghost, use </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getJailPosition(i)</span>, since now there are multiple ghosts each with their own jail positions.
+You can still obtain Pacman's position using `gameState.getPacmanPosition()`, but to get the jail position for a ghost, use `self.getJailPosition(i)`, since now there are multiple ghosts each with their own jail positions.
 
 **Your implementation should also again handle the special case when all particles receive zero weight.** In this case, `self.particles` should be recreated from the prior distribution by calling `initializeUniformly`.
 
-As in the `update` method for the `ParticleFilter` class, y<span style="line-height: 25.6px;">ou should again use the function </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getObservationProb</span><span style="line-height: 25.6px;"> to find the probability of an observation given Pacman's position, a potential ghost position, and the jail position. T</span><span style="line-height: 1.6;">he `sample` method of the `DiscreteDistribution` class will also be useful.</span>
+As in the `update` method for the `ParticleFilter` class, you should again use the function `self.getObservationProb` to find the probability of an observation given Pacman's position, a potential ghost position, and the jail position. The `sample` method of the `DiscreteDistribution` class will also be useful.
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q9</pre>
+``python autograder.py -q q9``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q9 --no-graphics</pre>
+``python autograder.py -q q9 --no-graphics``
 
 ### <a name="Q10"></a> QUESTION 10 (3 POINTS): Joint Particle Filter Time Elapse and Full Test
 
-Complete the `elapseTime` method in `JointParticleFilter` in `inference.py` to resample each particle correctly for the Bayes net. In particular, each ghost should draw a new position conditioned on the positions of all the ghosts at the previous time step.
+**Complete the `elapseTime` method in `JointParticleFilter` in `inference.py`** to resample each particle correctly for the Bayes net. In particular, each ghost should draw a new position conditioned on the positions of all the ghosts at the previous time step.
 
 As in the last question, you can loop over the ghosts using:
 
-<pre style="font-size: 16px; line-height: 25.6px;">for i in range(self.numGhosts):
-    ...</pre>
+``for i in range(self.numGhosts):
+    ...``
 
 Then, assuming that "`i`" refers to the index of the ghost, to obtain the distributions over new positions for that single ghost, given the list (`prevGhostPositions`) of previous positions of all of the ghosts, use:
 
-<pre style="font-size: 16px; line-height: 25.6px;">newPosDist = self.getPositionDistribution(gameState, prevGhostPositions, i, self.ghostAgents[i])</pre>
+``newPosDist = self.getPositionDistribution(gameState, prevGhostPositions, i, self.ghostAgents[i])``
 
 Note that completing this question involves grading both question 9 and question 10\. Since these questions involve joint distributions, they require more computational power (and time) to grade, so please be patient!
 
@@ -405,11 +405,11 @@ As you run the autograder note that `q10/1-JointParticlePredict` and `q10/2-J
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q10</pre>
+``python autograder.py -q q10``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q10 --no-graphics</pre>
+``python autograder.py -q q10 --no-graphics``
 
 ### <a name="Glossary"></a>Object Glossary
 
