@@ -197,7 +197,7 @@ Throughout this project, we will be using the `DiscreteDistribution` class def
 
 First, **fill in the `normalize` method**, which normalizes the values in the distribution to sum to one, but keeps the proportions of the values the same. Use the `total` method to find the sum of the values in the distribution. For an empty distribution or a distribution where all of the values are zero, do nothing. Note that this method modifies the distribution directly, rather than returning a new distribution.
 
-Second, fill in the `sample` method, which draws a sample from the distribution, where the probability that a key is sampled is proportional to its corresponding value. Assume that the distribution is not empty, and not all of the values are zero. Note that the distribution does not necessarily have to be normalized prior to calling this method. You may find Python's built-in `random.random()` function useful for this question.
+Second, **fill in the `sample` method**, which draws a sample from the distribution, where the probability that a key is sampled is proportional to its corresponding value. Assume that the distribution is not empty, and not all of the values are zero. Note that the distribution does not necessarily have to be normalized prior to calling this method. You may find Python's built-in `random.random()` function useful for this question.
 
 There are no autograder tests for this question, but the correctness of your implementation can be easily checked. We have provided [Python doctests](https://docs.python.org/2/library/doctest.html) as a starting point, and you can feel free to add more and implement other tests of your own. You can run the doctests using:
 
@@ -207,7 +207,7 @@ Note that, depending on the implementation details of the `sample` method, som
 
 ### <a name="Q1"></a> QUESTION 1 (2 POINTS): Observation Probability
 
-In this question, you will implement the `getObservationProb` method in the `InferenceModule` base class in `inference.py`. This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
+In this question, you will **implement the `getObservationProb` method in the `InferenceModule` base class in `inference.py`.** This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
 
 The distance sensor has a probability distribution over distance readings given the true distance from Pacman to the ghost. This distribution is modeled by the function `busters.getObservationProbability(noisyDistance, trueDistance)`, which returns `P(noisyDistance | trueDistance)` and is provided for you. You should use this function to help you solve the problem, and use the provided `manhattanDistance` function to find the distance between Pacman's location and the ghost's location.
 
@@ -221,21 +221,21 @@ As a general note, it is possible for some of the autograder tests to take a lon
 
 ### <a name="Q2"></a> QUESTION 2 (3 POINTS): Exact Inference Observation
 
-In this question, you will implement the `observeUpdate` method in `ExactInference` class of `inference.py` to correctly update the agent's belief distribution over ghost positions given an observation from Pacman's sensors. <span style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 22.4px;">You are implementing the online belief update for observing new evidence.</span> The observe method should,<span style="line-height: 25.6px;"> for this problem, update the belief at every position on the map after receiving a sensor reading. You should iterate your updates over the variable self.allPositions which includes all legal positions plus the special jail position. Beliefs represent the probability that the ghost is at a particular location, and are stored as a </span><span style="font-family: monospace, serif; line-height: 22.4px;">DiscreteDistribution</span><span style="line-height: 25.6px; font-size: 1em;"> object in a field called </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.beliefs</span><span style="line-height: 25.6px; font-size: 1em;">, which you should update.</span>
+In this question, you will **implement the `observeUpdate` method in `ExactInference` class of `inference.py`** to correctly update the agent's belief distribution over ghost positions given an observation from Pacman's sensors. You are implementing the online belief update for observing new evidence. The observe method should, for this problem, update the belief at every position on the map after receiving a sensor reading. You should iterate your updates over the variable self.allPositions which includes all legal positions plus the special jail position. Beliefs represent the probability that the ghost is at a particular location, and are stored as a DiscreteDistribution object in a field called self.beliefs, which you should update.
 
-<span style="line-height: 25.6px;">Before typing any code, </span><span style="line-height: 25.6px;">write down the equation of the inference problem you are trying to solve. </span>You should use the function <span style="font-family: monospace, serif; line-height: 22.4px;">self.getObservationProb</span><span style="line-height: 25.6px;"> that you wrote in the last question, which returns the probability of an observation given Pacman's position, a potential ghost position, and the jail position. You can obtain Pacman's position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">gameState.getPacmanPosition()</span><span style="font-size: 1em; line-height: 25.6px;">, and the jail position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getJailPosition()</span><span style="font-size: 1em; line-height: 25.6px;">.</span>
+**Before typing any code, write down the equation of the inference problem you are trying to solve.** You should use the function that you wrote in the last question, which returns the probability of an observation given Pacman's position, a potential ghost position, and the jail position. You can obtain Pacman's position using gameState.getPacmanPosition(), and the jail position using self.getJailPosition()
 
-<span style="line-height: 1.6;">In the Pacman display, high posterior beliefs are represented by bright colors, while low beliefs are represented by dim colors. You should start with a large cloud of belief that shrinks over time as more evidence accumulates. </span>As you watch the test cases, be sure that you understand how the squares converge to their final coloring. 
+In the Pacman display, high posterior beliefs are represented by bright colors, while low beliefs are represented by dim colors. You should start with a large cloud of belief that shrinks over time as more evidence accumulates. </span>As you watch the test cases, be sure that you understand how the squares converge to their final coloring. 
 
 _Note:_ your busters agents have a separate inference module for each ghost they are tracking. That's why if you print an observation inside the `update` function, you'll only see a single number even though there may be multiple ghosts on the board.
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q2</pre>
+``python autograder.py -q q2``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="text-rendering: optimizeLegibility; font-size: 16px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; line-height: 1.4em; vertical-align: baseline;">python autograder.py -q q2 --no-graphics</pre>
+``python autograder.py -q q2 --no-graphics``
 
 ***IMPORTANT***<span style="line-height: 25.6px;">: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the </span><span style="font-family: monospace, serif; line-height: 1.4em; white-space: pre-wrap;">--no-graphics</span><span style="font-size: 1em; line-height: 1.6em;"> flag. If the Gradescope autograder passes with this flag, then you</span><span style="font-size: 1em; line-height: 1.6em;"> will receive full points, even if your local autograder times out</span><span style="font-size: 1em; line-height: 1.6em;"> with </span><span style="font-size: 1em; line-height: 1.6em;">graphics.</span>
 
@@ -417,7 +417,12 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 ``DiscreteDistribution class`` in inference.py 
 
-Used to model belief distributions and weight distributions. This class is an extension of the built-in Python dictionary class, where the keys are the different discrete elements of our distribution, and the corresponding values are proportional to the belief or weight that the distribution assigns that element.
+Used to model belief distributions and weight distributions. This class is an extension of the built-in Python dictionary class, where the keys are the different discrete elements of our distribution, and the corresponding values are proportional to the belief or weight that the distribution assigns that element. This method modifies the distribution directly, rather than returning a new distribution.
+
+``getObservationProb`` in the `InferenceModule` base class in `inference.py`
+
+This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
+
 
 ### <a name="Submission"></a>Submission
 
