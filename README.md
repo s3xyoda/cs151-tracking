@@ -294,49 +294,49 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 Approximate inference is very trendy among ghost hunters this season. For the next few questions, you will implement a particle filtering algorithm for tracking a single ghost.
 
-First, implement the functions `initializeUniformly` and `getBeliefDistribution` in the `ParticleFilter` class in `inference.py`. <span style="line-height: 1.6;">A particle (sample) is a ghost position in this inference problem. Note that, for initialization, p</span>articles should be evenly (not randomly) distributed across legal positions in order to ensure a uniform prior.
+First, **implement the functions `initializeUniformly` and `getBeliefDistribution` in the `ParticleFilter` class in `inference.py`.** A particle (sample) is a ghost position in this inference problem. Note that, for initialization, particles should be evenly (not randomly) distributed across legal positions in order to ensure a uniform prior.
 
 **Note that the variable you store your particles in must be a list.** A list is simply a collection of unweighted variables (positions in this case). Storing your particles as any other data type, such as a dictionary, is incorrect and will produce errors. The `getBeliefDistribution` method then takes the list of particles and converts it into a `DiscreteDistribution` object.
 
 To test your code and run the autograder for this question:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q5</pre>
+``python autograder.py -q q5``
 
 ### <a name="Q6"></a> QUESTION 6 (3 POINTS): Approximate Inference Observe
 
-Next, we will implement the `observeUpdate` method in the `ParticleFilter` class in `inference.py`. This method constructs a weight distribution over `self.particles` where the weight of a particle is the probability of the observation given Pacman's position and that particle location. Then, we resample from this weighted distribution to construct our new list of particles.
+Next, we will **implement the `observeUpdate` method in the `ParticleFilter` class in `inference.py`.** This method constructs a weight distribution over `self.particles` where the weight of a particle is the probability of the observation given Pacman's position and that particle location. Then, we resample from this weighted distribution to construct our new list of particles.
 
-<span style="line-height: 25.6px;">You should again use the function </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getObservationProb</span><span style="line-height: 25.6px;"> to find the probability of an observation given Pacman's position, a potential ghost position, and the jail position. T</span><span style="line-height: 1.6;">he `sample` method of the `DiscreteDistribution` class will also be useful. As a reminder, y</span><span style="line-height: 25.6px;">ou can obtain Pacman's position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">gameState.getPacmanPosition()</span><span style="font-size: 1em; line-height: 25.6px;">, and the jail position using </span><span style="font-family: monospace, serif; line-height: 22.4px;">self.getJailPosition()</span><span style="font-size: 1em; line-height: 25.6px;">.</span>
+You should again use the function self.getObservationProb to find the probability of an observation given Pacman's position, a potential ghost position, and the jail position. The `sample` method of the `DiscreteDistribution` class will also be useful. As a reminder, you can obtain Pacman's position using gameState.getPacmanPosition(), and the jail position using self.getJailPosition().
 
-<span style="line-height: 1.6;">**There is one special case that a correct implementation must handle.** When all particles receive zero weight, the list of particles should be reinitialized by calling `initializeUniformly`. The `total` method of the `DiscreteDistribution` may be useful.</span>
+**There is one special case that a correct implementation must handle.** When all particles receive zero weight, the list of particles should be reinitialized by calling `initializeUniformly`. The `total` method of the `DiscreteDistribution` may be useful.
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q6</pre>
+``python autograder.py -q q6``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q6 --no-graphics</pre>
+``python autograder.py -q q6 --no-graphics``
 
 ### <a name="Q7"></a> QUESTION 7 (3 POINTS): Approximate Inference with Time Elapse
 
-Implement the `elapseTime` function in the `ParticleFilter` class in `inference.py`. This function should construct a new list of particles that corresponds to each existing particle in `self.particles` advancing a time step, and then assign this new list back to `self.particles`. When complete, you should be able to track ghosts nearly as effectively as with exact inference.
+**Implement the `elapseTime` function in the `ParticleFilter` class in `inference.py`.** This function should construct a new list of particles that corresponds to each existing particle in `self.particles` advancing a time step, and then assign this new list back to `self.particles`. When complete, you should be able to track ghosts nearly as effectively as with exact inference.
 
 Note that in this question, we will test both the `elapseTime` function in isolation, as well as the full implementation of the particle filter combining `elapseTime` and `observe`.
 
 As in the `elapseTime` method of the `ExactInference` class, you should use:
 
-<pre style="font-size: 16px; line-height: 25.6px;">newPosDist = self.getPositionDistribution(gameState, oldPos)</pre>
+``newPosDist = self.getPositionDistribution(gameState, oldPos)``
 
 This line of code obtains the distribution over new positions for the ghost, given its previous position (`oldPos`). <span style="line-height: 25.6px; text-rendering: optimizeLegibility; margin: 0px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; vertical-align: baseline;">T</span><span style="line-height: 1.6; text-rendering: optimizeLegibility; margin: 0px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; vertical-align: baseline;">he `sample` method of the </span>`DiscreteDistribution`<span style="line-height: 25.6px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;"> class will also be useful.</span>
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q7</pre>
+``python autograder.py -q q7``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q7 --no-graphics</pre>
+``python autograder.py -q q7 --no-graphics``
 
 
 ### <a name="Q8"></a> QUESTION 8 (1 POINT): Joint Particle Filter Initialization
@@ -424,6 +424,10 @@ This method takes in an observation (which is a noisy reading of the distance to
 ``livingGhostPositionDistributions``
 
 A list of `DiscreteDistribution` objects representing the position belief distributions for each of the ghosts that are still uncaptured.
+
+``elapseTime`` function in the `ParticleFilter` class in `inference.py`.
+
+This function should construct a new list of particles that corresponds to each existing particle in `self.particles` advancing a time step, and then assign this new list back to `self.particles`. You should be able to track ghosts nearly as effectively as with exact inference.
 
 ### <a name="Submission"></a>Submission
 
