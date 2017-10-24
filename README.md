@@ -417,17 +417,9 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 Used to model belief distributions and weight distributions. This class is an extension of the built-in Python dictionary class, where the keys are the different discrete elements of our distribution, and the corresponding values are proportional to the belief or weight that the distribution assigns that element. This method modifies the distribution directly, rather than returning a new distribution.
 
-``getObservationProb`` in the `InferenceModule` base class in `inference.py`
-
-This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
-
 ``livingGhostPositionDistributions``
 
 A list of `DiscreteDistribution` objects representing the position belief distributions for each of the ghosts that are still uncaptured.
-
-``elapseTime`` function in the `ParticleFilter` class in `inference.py`.
-
-This function should construct a new list of particles that corresponds to each existing particle in `self.particles` advancing a time step, and then assign this new list back to `self.particles`. You should be able to track ghosts nearly as effectively as with exact inference.
 
 ### <a name="Submission"></a>Submission
 
