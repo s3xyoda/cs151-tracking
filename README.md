@@ -245,13 +245,13 @@ In the previous question you implemented belief updates for Pacman based on his 
 
 <span style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 25.6px;">To understand why this is useful to Pacman, consider the following scenario in which there is Pacman and one Ghost. Pacman receives many observations which indicate the ghost is very near, but then one which indicates the ghost is very far. The reading indicating the ghost is very far is likely to be the result of a buggy sensor. Pacman's prior knowledge of how the ghost may move will decrease the impact of this reading since Pacman knows the ghost could not move so far in only one move.</span>
 
-In this question, you will implement the `elapseTime` method in `ExactInference`<span style="line-height: 25.6px;">. </span><span style="line-height: 25.6px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">The elapseTime step should,</span><span style="line-height: 25.6px; text-rendering: optimizeLegibility; margin: 0px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; vertical-align: baseline;"> for this problem, update the belief at every position on the map after one time step elapsing. </span><span style="font-size: 1em; line-height: 1.6em;">Your agent has access to the action distribution for the ghost through </span>`self.getPositionDistribution`<span style="font-size: 1em; line-height: 1.6em;">. In order to obtain the distribution over new positions for the ghost, given its previous position, use this line of code:</span>
+In this question, you will **implement the `elapseTime` method in `ExactInference`.** The elapseTime step should, for this problem, update the belief at every position on the map after one time step elapsing. Your agent has access to the action distribution for the ghost through </span>`self.getPositionDistribution`. In order to obtain the distribution over new positions for the ghost, given its previous position, use this line of code:
 
-<pre style="font-size: 16px; line-height: 25.6px;">newPosDist = self.getPositionDistribution(gameState, oldPos)</pre>
+``newPosDist = self.getPositionDistribution(gameState, oldPos)``
 
 Where `oldPos` refers to the previous ghost position. `newPosDist` is a `DiscreteDistribution` object, where for each position `p` in `self.allPositions`, `newPosDist[p]` is the probability that the ghost is at position `p` at time `t + 1`, given that the ghost is at position `oldPos` at time `t`. Note that this call can be fairly expensive, so if your code is timing out, one thing to think about is whether or not you can reduce the number of calls to `self.getPositionDistribution`.
 
-<span style="line-height: 25.6px;">Before typing any code, </span><span style="line-height: 25.6px;">write down the equation of the inference problem you are trying to solve. </span>In order to test your `predict` implementation separately from your `update` implementation in the previous question, this question will not make use of your `update` implementation.
+**Before typing any code, write down the equation of the inference problem you are trying to solve.** In order to test your `predict` implementation separately from your `update` implementation in the previous question, this question will not make use of your `update` implementation.
 
 Since Pacman is not observing the ghost, this means the ghost's actions will not impact Pacman's beliefs. Over time, Pacman's beliefs will come to reflect places on the board where he believes ghosts are most likely to be given the geometry of the board and what Pacman already knows about their valid movements.
 
@@ -259,11 +259,11 @@ For the tests in this question we will sometimes use a ghost with random movemen
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q3</pre>
+``python autograder.py -q q3``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="text-rendering: optimizeLegibility; font-size: 16px; padding: 0px; border: 0px; outline: 0px; font-stretch: inherit; line-height: 1.4em; vertical-align: baseline;">python autograder.py -q q3 --no-graphics</pre>
+``>python autograder.py -q q3 --no-graphics``
 
 As you watch the autograder output, remember that lighter squares indicate that pacman believes a ghost is more likely to occupy that location, and darker squares indicate a ghost is less likely to occupy that location. For which of the test cases do you notice differences emerging in the shading of the squares? Can you explain why some squares get lighter and some squares get darker?
 
@@ -271,25 +271,23 @@ As you watch the autograder output, remember that lighter squares indicate that 
 
 Now that Pacman knows how to use both his prior knowledge and his observations when figuring out where a ghost is, he is ready to hunt down ghosts on his own. This question will use your `observeUpdate` and `elapseTime` implementations together, along with a simple greedy hunting strategy which you will implement for this question. In the simple greedy strategy, Pacman assumes that each ghost is in its most likely position according to his beliefs, then moves toward the closest ghost. Up to this point, Pacman has moved by randomly selecting a valid action.
 
-Implement the `chooseAction` method in `GreedyBustersAgent` in `bustersAgents.py`. Your agent should first find the most likely position of each remaining uncaptured ghost, then choose an action that minimizes the maze distance to the closest ghost.
+**Implement the `chooseAction` method in `GreedyBustersAgent` in `bustersAgents.py`.** Your agent should first find the most likely position of each remaining uncaptured ghost, then choose an action that minimizes the maze distance to the closest ghost.
 
-To find the maze distance between any two positions <span style="font-family: monospace, serif; line-height: 25.6px;">pos1</span><span style="font-size: 1em; line-height: 1.6em;"> and </span><span style="font-family: monospace, serif; line-height: 25.6px;">pos2</span><span style="font-size: 1em; line-height: 1.6em;">, use </span>`self.distancer.getDistance(pos1, pos2)`<span style="font-size: 1em; line-height: 1.6em;">. To find the successor position of a position after an action:</span>
+To find the maze distance between any two positions, use `self.distancer.getDistance(pos1, pos2)`. To find the successor position of a position after an action:
 
-<pre style="font-size: 16px; line-height: 25.6px;">successorPosition = Actions.getSuccessor(position, action)</pre>
+``successorPosition = Actions.getSuccessor(position, action)``
 
 You are provided with `livingGhostPositionDistributions`, a list of `DiscreteDistribution` objects representing the position belief distributions for each of the ghosts that are still uncaptured.
 
-If correctly implemented, your agent should win the game in `q3/3-gameScoreTest` with a score greater than 700 at least 8 out of 10 times. _Note:_ the autograder will also check the correctness of your inference directly, but the outcome of games is a reasonable sanity check.
+If correctly implemented, **your agent should win the game in `q3/3-gameScoreTest` with a score greater than 700 at least 8 out of 10 times.** _Note:_ the autograder will also check the correctness of your inference directly, but the outcome of games is a reasonable sanity check.
 
 To run the autograder for this question and visualize the output:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q4</pre>
+``python autograder.py -q q4``
 
 If you want to run this test (or any of the other tests) without graphics you can add the following flag:
 
-<pre style="font-size: 16px; line-height: 25.6px;">python autograder.py -q q4 --no-graphics</pre>
-
-<span style="font-size: 1em; line-height: 1.6em;"> </span>
+``python autograder.py -q q4 --no-graphics``
 
 
 ### <a name="Q5"></a> QUESTION 5 (2 POINTS): Approximate Inference Initialization and Beliefs
@@ -423,6 +421,9 @@ Used to model belief distributions and weight distributions. This class is an ex
 
 This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
 
+``livingGhostPositionDistributions``
+
+A list of `DiscreteDistribution` objects representing the position belief distributions for each of the ghosts that are still uncaptured.
 
 ### <a name="Submission"></a>Submission
 
