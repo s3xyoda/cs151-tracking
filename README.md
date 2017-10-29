@@ -207,6 +207,8 @@ Note that, depending on the implementation details of the `sample` method, som
 
 ### <a name="Q1"></a> QUESTION 1 (2 POINTS): Observation Probability
 
+**Note:** This question assumes knowledge about exact inference in Hidden Markov Models (a special class of Bayes nets for tracking beliefs over time).  You can learn more by [watching the Spring 2017 lecture video](http://hmc.mediasite.com/mediasite/Play/4ea83053d9e44cb9b98f702a12117f251d?catalog=929cbbaa-c09c-420b-83e7-b7e8ddb17576).
+
 In this question, you will **implement the `getObservationProb` method in the `InferenceModule` base class in `inference.py`.** This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman's position, the ghost's position, and the position of the ghost's jail, and returns the probability of the noisy distance reading given Pacman's position and the ghost's position. In other words, we want to return `P(noisyDistance | pacmanPosition, ghostPosition)`.
 
 The distance sensor has a probability distribution over distance readings given the true distance from Pacman to the ghost. This distribution is modeled by the function `busters.getObservationProbability(noisyDistance, trueDistance)`, which returns `P(noisyDistance | trueDistance)` and is provided for you. You should use this function to help you solve the problem, and use the provided `manhattanDistance` function to find the distance between Pacman's location and the ghost's location.
@@ -291,6 +293,9 @@ If you want to run this test (or any of the other tests) without graphics you ca
 
 
 ### <a name="Q5"></a> QUESTION 5 (2 POINTS): Approximate Inference Initialization and Beliefs
+
+**Note:** This question assumes knowledge about approximate inference in Hidden Markov Models (a special class of Bayes nets for tracking beliefs over time).  You can learn more by [watching the Spring 2017 lecture video](http://hmc.mediasite.com/mediasite/Play/bea19a4a368243bd8a4c4cd04daa67511d?catalog=0c3e13cf-afc0-4f90-acac-c9a16db4e55c).
+
 
 Approximate inference is very trendy among ghost hunters this season. For the next few questions, you will implement a particle filtering algorithm for tracking a single ghost.
 
