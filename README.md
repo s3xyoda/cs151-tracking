@@ -219,6 +219,8 @@ To test your code and run the autograder for this question:
 
 <pre>python autograder.py -q q1</pre>
 
+**Note:** The default return statement of `getObservationProbability` returns something other than a number, which causes an error when running the autograder.  To avoid this error either implement the function or comment out the return statement.
+
 As a general note, it is possible for some of the autograder tests to take a long time to run for this project, and you will have to exercise patience. As long as the autograder doesn't time out, you should be fine (provided that you actually pass the tests).
 
 ### <a name="Q2"></a> QUESTION 2 (3 POINTS): Exact Inference Observation
